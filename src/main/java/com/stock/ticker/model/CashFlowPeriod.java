@@ -1,0 +1,35 @@
+package com.stock.ticker.model;
+
+public record CashFlowPeriod(
+        String fiscalDateEnding,
+        String reportedCurrency,
+        Long operatingCashflow,
+        Long paymentsForOperatingActivities,
+        Long proceedsFromOperatingActivities,
+        Long changeInOperatingLiabilities,
+        Long changeInOperatingAssets,
+        Long depreciationDepletionAndAmortization,
+        Long capitalExpenditures,
+        Long changeInReceivables,
+        Long changeInInventory,
+        Long profitLoss,
+        Long cashflowFromInvestment,
+        Long cashflowFromFinancing,
+        Long proceedsFromRepaymentsOfShortTermDebt,
+        Long paymentsForRepurchaseOfCommonStock,
+        Long paymentsForRepurchaseOfEquity,
+        Long paymentsForRepurchaseOfPreferredStock,
+        Long dividendPayout,
+        Long dividendPayoutCommonStock,
+        Long dividendPayoutPreferredStock,
+        Long proceedsFromIssuanceOfCommonStock,
+        Long proceedsFromIssuanceOfLongTermDebtAndCapitalSecuritiesNet,
+        Long proceedsFromIssuanceOfPreferredStock,
+        Long proceedsFromRepurchaseOfEquity,
+        Long proceedsFromSaleOfTreasuryStock,
+        Long stockBasedCompensation,
+        Long changeInCashAndCashEquivalents,
+        Long changeInExchangeRate,
+        Long netIncome
+) {
+}

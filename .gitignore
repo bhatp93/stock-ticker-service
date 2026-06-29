@@ -1,0 +1,9 @@
+target/
+dev.env
+.env
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.DS_Store

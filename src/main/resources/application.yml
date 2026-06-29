@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: stock-ticker-service
+  main:
+    web-application-type: none
+  datasource:
+    url: jdbc:postgresql://localhost:${POSTGRES_PORT:5432}/${POSTGRES_DB:stockdb}
+    username: ${POSTGRES_USER:stock}
+    password: ${POSTGRES_PASSWORD:}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+stock:
+  ticker-file: ${user.dir}/tickers.txt
+  # How long to cache market data responses (seconds). Set to 0 to disable.
+  cache-ttl-seconds: 60
+  # Free key: https://www.alphavantage.co/support/#api-key (or set ALPHA_VANTAGE_API_KEY env var)
+  alpha-vantage-api-key: ${ALPHA_VANTAGE_API_KEY:}
+  scheduling:
+    enabled: true
+    # Weekdays after US market close (UTC). Override with STOCK_DAILY_QUOTE_CRON.
+    daily-quote-cron: ${STOCK_DAILY_QUOTE_CRON:0 0 22 * * MON-FRI}
+    # 15th of Jan/Apr/Jul/Oct at 03:00 UTC.
+    quarterly-financials-cron: ${STOCK_QUARTERLY_FINANCIALS_CRON:0 0 3 15 1,4,7,10 *}
+    # Pause between symbols / API calls (Alpha Vantage free tier ~5 calls/min).
+    ingestion-delay-ms: ${STOCK_INGESTION_DELAY_MS:13000}
