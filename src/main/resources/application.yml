@@ -4,9 +4,9 @@ spring:
   main:
     web-application-type: none
   datasource:
-    url: jdbc:postgresql://localhost:${POSTGRES_PORT:5432}/${POSTGRES_DB:stockdb}
+    url: jdbc:postgresql://postgres:${POSTGRES_PORT:5432}/${POSTGRES_DB:stockdb}
     username: ${POSTGRES_USER:stock}
-    password: ${POSTGRES_PASSWORD:}
+    password: ${POSTGRES_PWD:}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

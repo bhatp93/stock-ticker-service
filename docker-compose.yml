@@ -1,4 +1,21 @@
 services:
+  stock-ticker-service:
+    build: .
+    container_name: stock-ticker-service
+    ports:
+      - "${APP_PORT}:8080"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PWD=${POSTGRES_PASSWORD}
+      - STOCK_DAILY_QUOTE_CRON=${STOCK_DAILY_QUOTE_CRON}
+      - STOCK_QUARTERLY_FINANCIALS_CRON=${STOCK_QUARTERLY_FINANCIALS_CRON}
+      - ALPHA_VANTAGE_API_KEY=${ALPHA_VANTAGE_API_KEY}
+    volumes:
+      - ./tickers.txt:/app/tickers.txt
+    depends_on:
+      postgres:
+        condition: service_healthy
+
   postgres:
     image: postgres:16-alpine
     container_name: stock-ticker-postgres
