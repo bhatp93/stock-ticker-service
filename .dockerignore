@@ -1,3 +1,9 @@
 .env
 target/*
 dev.env
+.git
+.idea
+*.iml
+.DS_Store
+.gitignore
+.README.md

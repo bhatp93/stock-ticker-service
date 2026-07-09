@@ -1,4 +1,4 @@
-name: buid-tag-push-image
+name: build-tag-push-image
 run-name: Build Tag and Push the ticker image to ghcr
 on:
   workflow_dispatch:
