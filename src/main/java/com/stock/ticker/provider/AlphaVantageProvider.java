@@ -12,12 +12,14 @@ import com.stock.ticker.model.FinancialStatements;
 import com.stock.ticker.model.StockSnapshot;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Primary;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 
 @Component
+@Primary
 public class AlphaVantageProvider implements StockDataProvider {
 
     private final String apiKey;

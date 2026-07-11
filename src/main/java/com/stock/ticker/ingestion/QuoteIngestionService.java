@@ -12,43 +12,43 @@ import org.springframework.stereotype.Service;
 public class QuoteIngestionService {
 
     private static final Logger log = LoggerFactory.getLogger(QuoteIngestionService.class);
-
+    //private final YahooFinanceProvider yahooFinanceProvider;
     private final AlphaVantageProvider alphaVantageProvider;
-    private final YahooFinanceProvider yahooFinanceProvider;
 
     public QuoteIngestionService(
-            AlphaVantageProvider alphaVantageProvider,
-            YahooFinanceProvider yahooFinanceProvider
+            //YahooFinanceProvider yahooFinanceProvider
+            AlphaVantageProvider alphaVantageProvider
+
     ) {
+        //this.yahooFinanceProvider = yahooFinanceProvider;
         this.alphaVantageProvider = alphaVantageProvider;
-        this.yahooFinanceProvider = yahooFinanceProvider;
     }
 
     public StockSnapshot fetchQuote(String symbol) throws Exception {
+        StockSnapshot alphaVantageQuote = null;
         try {
-            return alphaVantageProvider.fetchQuote(symbol);
+            alphaVantageQuote = alphaVantageProvider.fetchQuote(symbol);
         } catch (Exception ex) {
-            if (!shouldFallback(ex)) {
+                log.warn("Alpha Vantage quote failed for {} ({})",
+                        symbol, ex.getMessage());
                 throw ex;
-            }
-            log.warn("Alpha Vantage quote failed for {} ({}), falling back to Yahoo Finance",
-                    symbol, ex.getMessage());
-            return yahooFinanceProvider.fetch(symbol);
+            //return yahooFinanceProvider.fetch(symbol);
         }
+        return alphaVantageQuote;
     }
 
-    private static boolean shouldFallback(Exception ex) {
-        if (ex instanceof IllegalStateException || ex instanceof AlphaVantageException) {
-            return true;
-        }
-        String message = ex.getMessage();
-        if (message == null) {
-            return false;
-        }
-        String lower = message.toLowerCase();
-        return lower.contains("rate limit")
-                || lower.contains("api call frequency")
-                || lower.contains("thank you for using alpha vantage")
-                || lower.contains("premium");
-    }
+//    private static boolean shouldFallback(Exception ex) {
+//        if (ex instanceof IllegalStateException || ex instanceof AlphaVantageException) {
+//            return true;
+//        }
+//        String message = ex.getMessage();
+//        if (message == null) {
+//            return false;
+//        }
+//        String lower = message.toLowerCase();
+//        return lower.contains("rate limit")
+//                || lower.contains("api call frequency")
+//                || lower.contains("thank you for using alpha vantage")
+//                || lower.contains("premium");
+//    }
 }

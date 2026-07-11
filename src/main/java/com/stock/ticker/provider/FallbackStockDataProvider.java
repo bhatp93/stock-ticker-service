@@ -7,8 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
-@Component
-@Primary
+
 public class FallbackStockDataProvider implements StockDataProvider {
 
     private static final Logger log = LoggerFactory.getLogger(FallbackStockDataProvider.class);
