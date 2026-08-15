@@ -2,7 +2,7 @@ spring:
   application:
     name: stock-ticker-service
   main:
-    web-application-type: none
+    web-application-type: servlet
   datasource:
     url: jdbc:postgresql://postgres:${POSTGRES_PORT:5432}/${POSTGRES_DB:stockdb}
     username: ${POSTGRES_USER:stock}

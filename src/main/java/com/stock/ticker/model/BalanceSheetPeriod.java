@@ -40,4 +40,20 @@ public record BalanceSheetPeriod(
         Long commonStock,
         Long commonStockSharesOutstanding
 ) {
+    public static BalanceSheetPeriod forWorkingCapital(
+            Long inventory,
+            Long currentNetReceivables,
+            Long currentAccountsPayable
+    ) {
+        return new BalanceSheetPeriod(
+                null, null, null, null, null, null,
+                inventory,
+                currentNetReceivables,
+                null, null, null, null, null, null, null, null, null, null, null,
+                null, null,
+                currentAccountsPayable,
+                null, null, null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null
+        );
+    }
 }
