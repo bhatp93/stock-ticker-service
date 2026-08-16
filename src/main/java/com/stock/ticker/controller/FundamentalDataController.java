@@ -3,6 +3,7 @@ package com.stock.ticker.controller;
 
 import com.stock.ticker.errorHandling.BadRequestException;
 
+import com.stock.ticker.ingestion.PeriodType;
 import com.stock.ticker.model.WCRatioResponse;
 
 import com.stock.ticker.service.StockDataService;
@@ -43,6 +44,14 @@ public class FundamentalDataController {
         if(validSymbol.containsKey(false)){
             throw new BadRequestException(validSymbol.get(false));
         }
+        try{
+            PeriodType.valueOf(periodType.toUpperCase());
+        }
+        catch(IllegalArgumentException e){
+            throw new BadRequestException("Invalid periodType. Allowed values: ANNUAL, QUARTERLY");
+        }
+        if(dataLimit < 1 || dataLimit > 10 )
+            throw new BadRequestException("the data limit is historical data size. Cannot be less than 1 and greater than 10");
 
         WCRatioResponse workingCapitalRatioData = stockDataService.getWorkingCapitalRatioData(symbol, periodType, dataLimit);
         return ResponseEntity.ok().body(workingCapitalRatioData);
